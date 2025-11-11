@@ -1,0 +1,65 @@
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Initial optimization step
+ 
+ Alpha occ. eigenvalues --  -10.18456  -10.17832   -1.05643   -0.89234   -0.76543   -0.65432
+ Alpha virt. eigenvalues --    0.12345    0.34567    0.56789    1.02345    1.34567    1.67890
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 2
+ 
+ Alpha occ. eigenvalues --  -10.19234  -10.18643   -1.06123   -0.89876   -0.77123   -0.66234
+ Alpha virt. eigenvalues --    0.11234    0.33456    0.55678    1.01234    1.33456    1.66789
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 3
+ 
+ Alpha occ. eigenvalues --  -10.19876  -10.19234   -1.06543   -0.90234   -0.77543   -0.66765
+ Alpha virt. eigenvalues --    0.10543    0.32789    0.55012    1.00567    1.32789    1.66123
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 4
+ 
+ Alpha occ. eigenvalues --  -10.20123  -10.19567   -1.06789   -0.90456   -0.77765   -0.66987
+ Alpha virt. eigenvalues --    0.10123    0.32345    0.54567    1.00123    1.32345    1.65678
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 5
+ 
+ Alpha occ. eigenvalues --  -10.20345  -10.19789   -1.07012   -0.90678   -0.77987   -0.67209
+ Alpha virt. eigenvalues --    0.09876    0.32012    0.54234    0.99876    1.32012    1.65345
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 6
+ 
+ Alpha occ. eigenvalues --  -10.20456  -10.19876   -1.07123   -0.90789   -0.78098   -0.67320
+ Alpha virt. eigenvalues --    0.09654    0.31789    0.54012    0.99654    1.31789    1.65123
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 7
+ 
+ Alpha occ. eigenvalues --  -10.20523  -10.19943   -1.07234   -0.90876   -0.78165   -0.67387
+ Alpha virt. eigenvalues --    0.09432    0.31567    0.53789    0.99432    1.31567    1.64901
+
+ --Link1--
+ # B3LYP/6-31G(d) Opt
+
+ Optimization step 8
+ 
+ Alpha occ. eigenvalues --  -10.20567  -10.19987   -1.07312   -0.90932   -0.78223   -0.67445
+ Alpha virt. eigenvalues --    0.09234    0.31345    0.53567    0.99234    1.31345    1.64679
+
+ Job completed

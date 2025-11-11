@@ -4,8 +4,10 @@
 
 Exercise #5 requires creating a Fortran program that calculates π using two mathematical expressions:
 
-- **Expression 1 (Leibniz):** π = 4 ∑(k=0 to n-1) [(-1)^k / (2k+1)]
-- **Expression 2 (Euler):** π = √(6 ∑(k=1 to n) [1/k²])
+- **<u>Expression 1 (Leibniz):</u>** $$\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}=\frac{1}{1}-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\frac{1}{9}-...=\frac{\pi}{4}$$ 
+- which can be rethought of as: $$\pi=4\sum_{k=0}^{n-1}\frac{-1^k}{2k+1}$$
+- **<u>Expression 2 (Euler):</u>**$$\sum_{n=0}^{\infty}\frac{2^nn!^2}{(2n+1)!}=1+\frac{1}{3}+\frac{1\cdot2}{3\cdot5}+\frac{1\cdot2\cdot3}{3\cdot5\cdot7}...=\frac{\pi}{2}$$
+- which can be rethought of as: $$\pi=\sqrt(6\sum_{k=1}^{n}\frac{1}{k^2})$$
 
 The program must prompt the user for the number of terms (n), call two separate functions (pi_1 and pi_2) from different files, display both approximations and the actual π value (from acos(-1)).
 
