@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
 ### Key Points:
 - **Meshgrid**: Creates 2D coordinate arrays from 1D x and y arrays
-- **Blank Lines**: Essential for gnuplot to recognize row breaks in 3D data
+- **Blank Lines**: <font color="red">Essential!</font> for gnuplot to recognize row breaks in 3D data
 - **Precision**: Using `.6f` format ensures adequate precision for smooth plots
 - **Loop Order**: Iterate y in outer loop, x in inner loop for proper grid organization
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
 ### Finding the Maximum
 
-The function \(z(x,y) = \sin(x) \cos(y) + 0.2xy\) has its maximum at approximately:
+The function $z(x,y) = \sin(x) \cos(y) + 0.2xy$ has its maximum at approximately:
 - **Location**: x ≈ 1.5, y ≈ 1.5
 - **Value**: z ≈ 0.997 + 0.45 ≈ 1.45
 
@@ -177,8 +177,8 @@ set zlabel "z" offset 0,0,0
 set title "3D Surface Plot: z(x,y) = sin(x)cos(y) + 0.2xy"
 
 # Add arrow pointing to maximum
-set arrow 1 from 1.5, 1.5, 0 to 1.5, 1.5, 1.5 head lw 2 lc rgb "red"
-set label "Max" at 1.5, 1.5, 1.8 font "Arial,14" textcolor rgb "red"
+set arrow 1 from 5, 3, 2 to 5, 3, 3.95 head lw 2 lc rgb "red"
+set label "Max" at 5.5, 2.5, 1.95 font "Arial,14" textcolor rgb "red"
 
 # Plot the data
 splot 'values.dat' with lines lc rgb "blue" title "z(x,y)"
@@ -212,11 +212,11 @@ set ylabel "y" offset 0,0,0
 set title "2D Contour Plot: z(x,y) = sin(x)cos(y) + 0.2xy"
 
 # Add arrow to maximum (now in 2D coordinates)
-set arrow 1 from 1.5, 1.5 to 1.7, 1.7 head lw 2 lc rgb "red"
-set label "Max" at 1.8, 1.8 font "Arial,14" textcolor rgb "red"
+set arrow 1 from 4.7, 2.7 to 5, 3 head lw 2 lc rgb "red"
+set label "Max" at 5, 3 font "Arial,14" textcolor rgb "red"
 
 # Plot the data as 2D contour
-plot 'values.dat' with lines lc rgb "blue" title "Level Curves"
+splot 'values.dat' with lines lc rgb "blue" title "Level Curves"
 ```
 
 ---
@@ -363,6 +363,9 @@ plot 'values.dat' with lines lc rgb "blue"
 
 ## Learning Resources
 
+### Helpful web reference for contours
+- <href>http://www.gnuplot.info/demo/contours.html</href>
+
 ### Key Gnuplot Concepts
 - **splot**: Surface plot (3D data)
 - **plot**: 2D line/contour plot
@@ -386,4 +389,4 @@ The partial derivatives help understand extrema:
 - \(\frac{\partial z}{\partial x} = \cos(x)\cos(y) + 0.2y = 0\)
 - \(\frac{\partial z}{\partial y} = -\sin(x)\sin(y) + 0.2x = 0\)
 
-Solving numerically gives the maximum approximately at (1.5, 1.5).
+Solving numerically gives the maximum approximately at (5, 3).

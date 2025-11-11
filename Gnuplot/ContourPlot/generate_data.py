@@ -28,7 +28,7 @@ def generate_data(x_min=-2, x_max=2, y_min=-2, y_max=2, resolution=100):
     Args:
         x_min, x_max: Range for x values
         y_min, y_max: Range for y values
-        resolution: Number of points per dimension (resolution × resolution grid)
+        resolution: Number of points per dimension (resolution x resolution grid)
     
     Returns:
         data_array: Numpy array with shape (resolution^2, 3) containing [x, y, z]
@@ -76,7 +76,7 @@ def print_statistics(data_array, ranges, Z):
     print(f"Function: z = cos(x³ - y) - sin(x + y)")
     print(f"\nGrid Dimensions:")
     print(f"  Total points: {len(data_array):,}")
-    print(f"  Grid size: {int(np.sqrt(len(data_array)))}×{int(np.sqrt(len(data_array)))}")
+    print(f"  Grid size: {int(np.sqrt(len(data_array)))}x{int(np.sqrt(len(data_array)))}")
     print(f"\nCoordinate Ranges:")
     print(f"  X range: [{x_min}, {x_max}]")
     print(f"  Y range: [{y_min}, {y_max}]")
@@ -96,7 +96,7 @@ def print_statistics(data_array, ranges, Z):
 if __name__ == "__main__":
     # Generate data with 100×100 resolution
     print("Generating data for z = cos(x³ - y) - sin(x + y)...")
-    data_array, ranges, Z = generate_data(x_min=-2, x_max=2, y_min=-2, y_max=2, resolution=100)
+    data_array, ranges, Z = generate_data(x_min=0, x_max=2, y_min=0, y_max=5, resolution=100)
     
     # Save to file
     save_to_file(data_array, 'values.dat')
