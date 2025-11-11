@@ -34,8 +34,43 @@ Write a **one-line command** that identifies all lines in a file called `program
 ### Solution 1: grep with pipe (RECOMMENDED)
 
 ```bash
+grep 'x_pos' ./program.f90
+grep 'x_pos' ./program.f90 | wc -l
+echo
 grep 'x_pos' program.f90 | grep -v 'y_pos'
+grep 'x_pos' program.f90 | grep -v 'y_pos' | wc -l
 ```
+
+**Expected Output**
+```bash
+      REAL :: x_pos, y_pos, z_pos
+      x_pos = 0.0
+        x_pos = x_pos + velocity_x * 0.01
+        PRINT *, 'x_pos =', x_pos
+        IF (x_pos > 10.0) THEN
+          x_pos = 10.0
+        IF (x_pos < -10.0) THEN
+          x_pos = -10.0
+        PRINT *, 'Updated x_pos:', x_pos
+      PRINT *, 'Final x_pos =', x_pos
+10
+
+      x_pos = 0.0
+        x_pos = x_pos + velocity_x * 0.01
+        PRINT *, 'x_pos =', x_pos
+        IF (x_pos > 10.0) THEN
+          x_pos = 10.0
+        IF (x_pos < -10.0) THEN
+          x_pos = -10.0
+        PRINT *, 'Updated x_pos:', x_pos
+      PRINT *, 'Final x_pos =', x_pos
+9
+```
+- **NOTE** that the first line from the original command is no longer present in the second command:
+```bash
+      REAL :: x_pos, y_pos, z_pos
+```
+
 
 **Explanation:**
 - `grep 'x_pos' program.f90`: Searches for lines containing the literal string 'x_pos'
@@ -205,6 +240,37 @@ if [ "$size1" -gt "$size2" ]; then
 else
     echo "Larger file: $file2"
 fi
+```
+---
+## Saving and Running Bash Scripts
+
+To save a bash script and run it, follow these steps:
+
+1. **Create and Save the Script:**
+    - Open a text editor (like `nano`, `vim`, or any graphical text editor you prefer).
+    - Paste your bash script code into the editor.
+    - Save the file with a `.sh` extension, for example: `my_bash_script.sh`.
+
+Example using `nano` editor from terminal:
+
+```bash
+nano my_bash_script.sh
+```
+
+Paste the code, then press Ctrl+O to save, Enter to confirm filename, and Ctrl+X to exit.
+
+2. **Make the Script Executable:**
+    - Before running a script, you need to grant it execute permissions:
+
+```bash
+chmod +x my_bash_script.sh
+```
+
+3. **Run the Script:**
+    - To execute the script, run:
+
+```bash
+./my_bash_script.sh
 ```
 
 ---

@@ -1,14 +1,14 @@
 # Exercise #1 Linux Bash Scripting Walkthrough
 
-A complete guide to solving the 2022 Final Exam Exercise #1, with sample files, code snippets, and bash scripting tips.
+A complete guide to solving Linux Bash Scripting Exercise #1, with sample files, code snippets, and bash scripting tips.
 
 ---
 
 ## Overview
 
 **Exercise #1** consists of two parts:
-- **Part 3.1**: Create a script that swaps lines 2 and 3 for all `.swap23` files
-- **Part 3.2**: Create an interactive script with conditional logic based on whether input is a file, directory, or new name
+- **Part 1**: Create a script that swaps lines 2 and 3 for all `.swap23` files
+- **Part 2**: Create an interactive script with conditional logic based on whether input is a file, directory, or new name
 
 ---
 
@@ -128,7 +128,7 @@ Used to verify proper file extension filtering
 
 ---
 
-## Part 3.1: Swap Lines 2 and 3 in .swap23 Files
+## Part 1: Swap Lines 2 and 3 in .swap23 Files
 
 ### Step-by-Step Breakdown
 
@@ -153,7 +153,7 @@ tail -n +3 file.txt   # Get lines starting from line 3 onward
 - `$()` syntax captures command output for use in variables
 - More modern than backticks `` ` ` ``
 
-#### Complete Solution for Part 3.1
+#### Complete Solution for Part 1
 
 ```bash
 #!/bin/bash
@@ -169,8 +169,11 @@ for file in *.swap23; do
         continue
     fi
     
-    # Check if file has at least 3 lines
+    # Check if file has at least 3 lines - but fails if there's 
+    # exactly 3 lines with no carriage return at the end of line 3
     line_count=$(wc -l < "$file")
+    # Better implementation
+    line_count=$(grep -c '^' < "$file")
     if [ "$line_count" -lt 3 ]; then
         echo "Warning: $file has less than 3 lines, skipping..."
         continue
@@ -252,7 +255,7 @@ done
 
 ---
 
-## Part 3.2: Interactive File Analysis Script
+## Part 2: Interactive File Analysis Script
 
 ### Step-by-Step Breakdown
 
@@ -291,12 +294,12 @@ echo "content" >> file.txt     # Append to file
 echo "content" > file.txt      # Overwrite file
 ```
 
-#### Complete Solution for Part 3.2
+#### Complete Solution for Part 2
 
 ```bash
 #!/bin/bash
 
-# Script 3.2: Interactive file analysis
+# Script 2: Interactive file analysis
 # Asks for input and performs different actions based on type
 
 read -p "Enter file or directory name: " input_name
@@ -354,7 +357,7 @@ fi
 ```bash
 #!/bin/bash
 
-# Enhanced version of script 3.2 with additional checks
+# Enhanced version of script 2 with additional checks
 
 read -p "Enter file or directory name: " input_name
 
@@ -450,14 +453,14 @@ fi
 #!/bin/bash
 
 # Exercise #1 Complete Solution
-# Parts 3.1 and 3.2 combined in one script
+# Parts 1 and 2 combined in one script
 # Usage: ./solution.sh
 
 # ============================================================
-# PART 3.1: Swap lines 2 and 3 in all .swap23 files
+# PART 1: Swap lines 2 and 3 in all .swap23 files
 # ============================================================
 
-echo "=== Part 3.1: Processing .swap23 files ==="
+echo "=== Part 1: Processing .swap23 files ==="
 echo ""
 
 processed_count=0
@@ -502,16 +505,16 @@ if [ $processed_count -eq 0 ]; then
 fi
 
 echo ""
-echo "Part 3.1 Complete! Processed $processed_count files."
+echo "Part 1 Complete! Processed $processed_count files."
 echo ""
 echo "============================================================"
 echo ""
 
 # ============================================================
-# PART 3.2: Interactive file analysis
+# PART 2: Interactive file analysis
 # ============================================================
 
-echo "=== Part 3.2: Interactive File Analysis ==="
+echo "=== Part 2: Interactive File Analysis ==="
 echo ""
 
 read -p "Enter file or directory name: " input_name
@@ -748,7 +751,7 @@ cp /path/to/sample/files/* .
 # Other: readme.txt, config.ini, data.csv
 ```
 
-### Step 2: Run Part 3.1
+### Step 2: Run Part 1
 ```bash
 # Create the script
 cat > part31.sh << 'EOF'
@@ -777,7 +780,7 @@ echo "=== Before and After ==="
 cat data1.swap23  # Should show line 3 then line 2
 ```
 
-### Step 3: Run Part 3.2
+### Step 3: Run Part 2
 ```bash
 # Test Case 1: Existing file
 ./part32.sh
@@ -836,8 +839,8 @@ done
 
 ## Summary Checklist
 
-- ✅ Part 3.1: Script that swaps lines 2 and 3 in all `.swap23` files
-- ✅ Part 3.2: Interactive script that:
+- ✅ Part 1: Script that swaps lines 2 and 3 in all `.swap23` files
+- ✅ Part 2: Interactive script that:
   - Displays line count for existing files
   - Copies `.f90` files to existing directories
   - Creates new file with `.py` filenames and import counts
