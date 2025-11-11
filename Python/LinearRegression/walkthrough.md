@@ -53,7 +53,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Generate sample data
-iterations = np.arange(1, 15)  # Iterations 1 to 14
+iterations = np.arange(1, 35)  # Iterations 1 to 34
 
 # Simulate exponential decay of Delta-E
 true_slope = -0.3
@@ -83,21 +83,67 @@ data = np.column_stack((iterations, random_cols[:, 0], deltaE, random_cols[:, 1]
 Select only iterations 5 through 14, extract the relevant columns, and compute the logarithm:
 
 ```python
-# Define iteration range
+def read_orca_out(filename):
+    """
+    Reads the SCF ITERATIONS table from orca.out and extracts iteration numbers and Delta-E values.
+    
+    Assumes the file contains whitespace-separated columns, where:
+    - First column is iteration number
+    - Third column (index 2) contains Delta-E values
+    Ignores other columns.
+    """
+    iterations = []
+    deltaE_vals = []
+    
+    with open(filename, 'r') as file:
+        for line in file:
+            # Strip line of whitespace and skip empty or malformed lines
+            line = line.strip()
+            if not line:
+                continue
+            
+            # Skip header lines if necessary (e.g., if actual orca.out has)
+            # For this example, assume all lines are data
+            
+            # Split line by whitespace or '|'
+            parts = line.replace('|', ' ').split()
+            
+            # Expect at least 3 columns (iteration, ..., Delta-E)
+            if len(parts) < 3:
+                continue
+            
+            try:
+                iteration = int(parts[0])
+                deltaE = float(parts[2])
+            except ValueError:
+                # Skip any lines that cannot be parsed
+                continue
+            
+            iterations.append(iteration)
+            deltaE_vals.append(deltaE)
+    
+    return np.array(iterations), np.array(deltaE_vals)
+
+# Usage example with previously saved orca.out file:
+# Make sure the orca.out file contains the sample data exactly as shown in your message
+iterations, deltaE = read_orca_out('orca.out')
+
+# Now filter the data from iteration 5 to 14
 start_iter = 5
 end_iter = 14
+# Filter data for the specified iteration range
+mask = (iterations >= start_iter) & (iterations <= end_iter)
+# Extract x (iteration numbers) and y (Delta-E values)
+x = iterations[mask]     # Column 0: iterations
+y_deltaE = deltaE[mask]  # Column 2: Delta-E
 
-# Filter data for iterations 5 to 14
-mask = (data[:, 0] >= start_iter) & (data[:, 0] <= end_iter)
-selected_data = data[mask]
-
-# Extract x (iterations) and y (Delta-E)
-x = selected_data[:, 0]        # Iteration numbers
-y_deltaE = selected_data[:, 2] # Delta-E values
-
-# Convert to log10 scale
+# Convert to log10 scale for regression
 y = np.log10(np.abs(y_deltaE))
+
+
 ```
+
+![resulting_plot](linreg.png)
 
 ### Step 3: Perform Linear Regression
 
@@ -159,8 +205,8 @@ import matplotlib.pyplot as plt
 # Set random seed for reproducibility
 np.random.seed(42)
 
-# Generate iterations 1 to 14
-iterations = np.arange(1, 15)
+# Generate iterations 1 to 34
+iterations = np.arange(1, 35)
 
 # Simulate exponential decay characteristic of SCF convergence
 # log10(abs(DeltaE)) = true_slope * iteration + true_intercept
@@ -180,7 +226,7 @@ data = np.column_stack((iterations, random_cols[:, 0], deltaE, random_cols[:, 1]
 print("Sample SCF ITERATIONS table (first 5 rows):")
 print("Iteration | Random1 | Delta-E | Random2 | Random3")
 print("-" * 60)
-for i in range(min(5, data.shape[0])):
+for i in range(min(25, data.shape[0])):
     print(f"{data[i, 0]:9.0f} | {data[i, 1]:7.3f} | {data[i, 2]:7.3e} | {data[i, 3]:7.3f} | {data[i, 4]:7.3f}")
 print()
 
@@ -188,20 +234,63 @@ print()
 # STEP 2: Extract and preprocess data
 # ============================================================================
 
-# Define the range of iterations to use for fitting
+def read_orca_out(filename):
+    """
+    Reads the SCF ITERATIONS table from orca.out and extracts iteration numbers and Delta-E values.
+    
+    Assumes the file contains whitespace-separated columns, where:
+    - First column is iteration number
+    - Third column (index 2) contains Delta-E values
+    Ignores other columns.
+    """
+    iterations = []
+    deltaE_vals = []
+    
+    with open(filename, 'r') as file:
+        for line in file:
+            # Strip line of whitespace and skip empty or malformed lines
+            line = line.strip()
+            if not line:
+                continue
+            
+            # Skip header lines if necessary (e.g., if actual orca.out has)
+            # For this example, assume all lines are data
+            
+            # Split line by whitespace or '|'
+            parts = line.replace('|', ' ').split()
+            
+            # Expect at least 3 columns (iteration, ..., Delta-E)
+            if len(parts) < 3:
+                continue
+            
+            try:
+                iteration = int(parts[0])
+                deltaE = float(parts[2])
+            except ValueError:
+                # Skip any lines that cannot be parsed
+                continue
+            
+            iterations.append(iteration)
+            deltaE_vals.append(deltaE)
+    
+    return np.array(iterations), np.array(deltaE_vals)
+
+# Usage example with previously saved orca.out file:
+# Make sure the orca.out file contains the sample data exactly as shown in your message
+iterations, deltaE = read_orca_out('orca.out')
+
+# Now filter the data from iteration 5 to 14
 start_iter = 5
 end_iter = 14
-
 # Filter data for the specified iteration range
-mask = (data[:, 0] >= start_iter) & (data[:, 0] <= end_iter)
-selected_data = data[mask]
-
+mask = (iterations >= start_iter) & (iterations <= end_iter)
 # Extract x (iteration numbers) and y (Delta-E values)
-x = selected_data[:, 0]        # Column 0: iterations
-y_deltaE = selected_data[:, 2] # Column 2: Delta-E
+x = iterations[mask]     # Column 0: iterations
+y_deltaE = deltaE[mask]  # Column 2: Delta-E
 
-# Compute log10 of absolute Delta-E
+# Convert to log10 scale for regression
 y = np.log10(np.abs(y_deltaE))
+
 
 # ============================================================================
 # STEP 3: Perform linear regression

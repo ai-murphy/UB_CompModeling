@@ -1,15 +1,15 @@
-# Exercise #5: Calculating π in Fortran - Complete Walkthrough
+# Exercise: Calculating π in Fortran - Complete Walkthrough
 
-## Overview of Exercise #5
+## Overview
 
-Exercise #5 requires creating a Fortran program that calculates π using two mathematical expressions:
+This exercise requires creating a Fortran program that calculates π using two mathematical expressions:
 
 - **<u>Expression 1 (Leibniz):</u>** $$\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}=\frac{1}{1}-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\frac{1}{9}-...=\frac{\pi}{4}$$ 
 - which can be rethought of as: $$\pi=4\sum_{k=0}^{n-1}\frac{-1^k}{2k+1}$$
 - **<u>Expression 2 (Euler):</u>**$$\sum_{n=0}^{\infty}\frac{2^nn!^2}{(2n+1)!}=1+\frac{1}{3}+\frac{1\cdot2}{3\cdot5}+\frac{1\cdot2\cdot3}{3\cdot5\cdot7}...=\frac{\pi}{2}$$
 - which can be rethought of as: $$\pi=\sqrt(6\sum_{k=1}^{n}\frac{1}{k^2})$$
 
-The program must prompt the user for the number of terms (n), call two separate functions (pi_1 and pi_2) from different files, display both approximations and the actual π value (from acos(-1)).
+The program must prompt the user for the number of terms (n), call two separate functions (pi_1 and pi_2) from different files, display both approximations and the actual $\pi$ value (from $acos(-1)$).
 
 ---
 
@@ -476,4 +476,4 @@ The Leibniz series converges slowly (order 1/n), while the Euler series converge
 
 ---
 
-This guide provides everything needed to complete Exercise #5. Good luck with your project!
+This guide provides everything needed to complete this exercise. Good luck with your project!
