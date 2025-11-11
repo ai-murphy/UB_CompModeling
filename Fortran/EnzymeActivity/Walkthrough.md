@@ -1,7 +1,20 @@
-# Fortran Exercise #3 Walkthrough: Enzymatic Activity Rate Calculations
+# Exercise: Enzymatic Activity Rate Calculations
 
 ## Overview
 This exercise requires creating a Fortran90 program that calculates two expressions for enzymatic activity rate (v) using separate functions, generates formatted tables for two different parameter sets, outputs to both screen and files, and uses a makefile for compilation.
+
+## Task
+
+Make a Fortran program that calculates both expressions of the rate of the enzymatic activity (v):
+- Exp1 v1 = k2 * [E0] * [S] / (KM + [S])
+- Exp2: v2 = k2 * [E0] * [S] / (KM * (1 + [I]/KI) + [S])
+
+The calculation of $𝑣_1$ and $v_2$ expressions should be done by different functions and saved in separate files. 
+The main program has to call the two functions and write two tables (on the screen and into separate files: `table1.out` and `table2.out`) of values with three columns ([S], $𝑣_1$, and $v_2$) In both tables, [S] goes from 0.01 M to 0.1 M using increments of 0.01 M.
+- For the first table, use the values of k2=0.002, E0=0.04M, KM=0.005, I=0.1 M, KI=0.002
+- For the second table, use the values of k2=0.0005, E0=0.06M, KM=0.01, I=0.03M, KI=0.03
+
+Compilation must be done using make. The makefile must have a minimum of 4 rules.
 
 ## Mathematical Expressions
 
@@ -93,8 +106,8 @@ program enzymatic_activity
     real(kind=8) :: k2_2, E0_2, KM_2, I_2, KI_2
     
     ! Loop and calculation variables
-    integer :: i
-    real(kind=8) :: S, v1, v2
+    !integer :: j
+    !real(kind=8) :: S, v1, v2
     
     ! Initialize parameters for first table
     k2_1 = 0.002d0
@@ -120,7 +133,7 @@ contains
     subroutine generate_table(table_num, k2, E0, KM, I, KI)
         integer, intent(in) :: table_num
         real(kind=8), intent(in) :: k2, E0, KM, I, KI
-        integer :: i
+        integer :: j
         real(kind=8) :: S, v1, v2
         character(len=20) :: filename
         
@@ -133,15 +146,15 @@ contains
         ! Print header to screen
         print *, '====== Table ', table_num, ' ======'
         print '(3(A15))', '[S] (M)', 'v1', 'v2'
-        print '(50A)', ('-', i=1,50)
+        print '(50A)', ('-', j=1,50)
         
         ! Print header to file
         write(10, '(3(A15))') '[S] (M)', 'v1', 'v2'
-        write(10, '(50A)') ('-', i=1,50)
+        write(10, '(50A)') ('-', j=1,50)
         
         ! Loop from [S] = 0.01 to 0.1 in steps of 0.01
-        do i = 1, 10
-            S = 0.01d0 * i
+        do j = 1, 10
+            S = 0.01d0 * j
             v1 = calc_v1(k2, E0, S, KM)
             v2 = calc_v2(k2, E0, S, KM, I, KI)
             
@@ -153,11 +166,11 @@ contains
         end do
         
         ! Print footer to screen
-        print '(50A)', ('-', i=1,50)
+        print '(50A)', ('-', j=1,50)
         print *
         
         ! Print footer to file
-        write(10, '(50A)') ('-', i=1,50)
+        write(10, '(50A)') ('-', j=1,50)
         
         close(unit=10)
     end subroutine generate_table
@@ -448,6 +461,10 @@ program enzymatic_activity
     ! Variables for second dataset
     real(kind=8) :: k2_2, E0_2, KM_2, I_2, KI_2
     
+    ! Loop and calculation variables
+    !integer :: j
+    !real(kind=8) :: S, v1, v2
+    
     ! Initialize parameters for first table
     k2_1 = 0.002d0
     E0_1 = 0.04d0
@@ -472,7 +489,7 @@ contains
     subroutine generate_table(table_num, k2, E0, KM, I, KI)
         integer, intent(in) :: table_num
         real(kind=8), intent(in) :: k2, E0, KM, I, KI
-        integer :: i
+        integer :: j
         real(kind=8) :: S, v1, v2
         character(len=20) :: filename
         
@@ -485,15 +502,15 @@ contains
         ! Print header to screen
         print *, '====== Table ', table_num, ' ======'
         print '(3(A15))', '[S] (M)', 'v1', 'v2'
-        print '(50A)', ('-', i=1,50)
+        print '(50A)', ('-', j=1,50)
         
         ! Print header to file
         write(10, '(3(A15))') '[S] (M)', 'v1', 'v2'
-        write(10, '(50A)') ('-', i=1,50)
+        write(10, '(50A)') ('-', j=1,50)
         
         ! Loop from [S] = 0.01 to 0.1 in steps of 0.01
-        do i = 1, 10
-            S = 0.01d0 * i
+        do j = 1, 10
+            S = 0.01d0 * j
             v1 = calc_v1(k2, E0, S, KM)
             v2 = calc_v2(k2, E0, S, KM, I, KI)
             
@@ -505,11 +522,11 @@ contains
         end do
         
         ! Print footer to screen
-        print '(50A)', ('-', i=1,50)
+        print '(50A)', ('-', j=1,50)
         print *
         
         ! Print footer to file
-        write(10, '(50A)') ('-', i=1,50)
+        write(10, '(50A)') ('-', j=1,50)
         
         close(unit=10)
     end subroutine generate_table
@@ -611,4 +628,4 @@ ls -la *.o
 ls -la *.mod
 ```
 
-This completes Exercise #3! The solution demonstrates Fortran90 best practices including modular design, proper I/O handling, makefile organization, and numerical computation.
+This completes the exercise! The solution demonstrates Fortran90 best practices including modular design, proper I/O handling, makefile organization, and numerical computation.

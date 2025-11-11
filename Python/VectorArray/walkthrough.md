@@ -100,7 +100,7 @@ normalized_vectors = vectors / np.linalg.norm(vectors, axis=2, keepdims=True)
 ```
 
 **Explanation:**
-- `np.linalg.norm(vectors, axis=2)`: Computes the norm along axis 2 (the x, y, z components)
+- `np.linalg.norm(vectors, axis=2)`: Computes the norm along axis 2 (3rd from 0; the x, y, z components)
 - Returns shape (5, 7) - one norm per particle
 - `keepdims=True`: Keeps it as shape (5, 7, 1) for proper broadcasting
 - Division broadcasts automatically: each vector is divided by its norm
