@@ -1,4 +1,3 @@
-<script src="https://rawcdn.githack.com/oscarmorrison/md-page/master/md-page.js"></script><noscript>
 
 
 # Common formulas used in Statistical Mechanics.
@@ -9,17 +8,18 @@ Here is a concise list of the most common formulas used in statistical mechanics
 
 - Boltzmann constant: $$ k_B $$
 - Reciprocal temperature (often used): $$ \beta = \frac{1}{k_B T} $$
-- Equipartition theorem: Each quadratic degree of freedom contributes $$ \frac{1}{2}k_B T $$ to internal energy.
+- Equipartition theorem: 
+  -  Each quadratic degree of freedom contributes $$ \frac{1}{2}k_B T $$ to internal energy.
 
 
 ## Partition Functions and Ensembles
 
 - **Microcanonical Ensemble**:
-    - Number of microstates at energy $$ E $$: $$ \Omega(E) $$
+    - Number of microstates at energy $E$: $$ \Omega(E) $$
     - Entropy: $$ S(E,V,N) = k_B \ln \Omega(E) $$
 - **Canonical Ensemble**:
     - Partition function: $$ Z = \sum_i e^{-\beta E_i} $$
-    - Probability of state $$ i $$: $$ P_i = \frac{e^{-\beta E_i}}{Z} $$
+    - Probability of state $i$: $$ P_i = \frac{e^{-\beta E_i}}{Z} $$
     - Helmholtz free energy: $$ F = -k_B T \ln Z $$
     - Internal energy: $$ U = - \frac{\partial}{\partial \beta} \ln Z $$
     - Energy fluctuations: $$ \langle (\Delta E)^2 \rangle = k_B T^2 C_v $$
@@ -46,7 +46,7 @@ Here is a concise list of the most common formulas used in statistical mechanics
 
 - Boltzmann factor: $$ P_i \propto e^{-\beta E_i} $$
 - Maxwell-Boltzmann speed distribution (ideal gas): $$ f(v) \propto v^2 e^{-\frac{mv^2}{2k_B T}} $$
-- Chemical equilibrium: Law of mass action ($$ K = \frac{[Products]}{[Reactants]} $$) where $$ K $$ can be calculated from partition functions.
+- Chemical equilibrium: Law of mass action $$ K = \frac{[Products]}{[Reactants]} $$ where $K$ can be calculated from partition functions.
 
 
 ## Thermodynamic Derivatives
@@ -66,7 +66,7 @@ Here is a concise list of the most common formulas used in statistical mechanics
 
 - Ideal Gas Law: $$ PV = Nk_B T $$
 - Ising Model energy: $$ E = -J \sum_{\langle i,j \rangle} S_i S_j - h \sum_i S_i $$
-- Diffusion: $$ \langle x^2 \rangle = 2 D t $$, where $$ D $$ is the diffusion constant.
+- Diffusion where $D$ is the diffusion constant: $$ \langle x^2 \rangle = 2 D t $$
 
 
 ## Derivatives and Free Energy
