@@ -1,3 +1,28 @@
+## Introduction
+
+The Ising model is a milestone of statistical physics. In a famous mathematical tour de
+force, in 1944 Lars Onsager was able to solve exactly the model in the L → ∞ limit in two
+dimensions. The Onsager solution exhibits a continuous phase transition from paramagnet
+to ferromagnet (or liquid-gas transition in the lattice-gas interpretation) at the critical temperature $T_c = 2/ ln(1 + \sqrt{2}) = 2.269185$.... Subsequently, Ferdinand and Fisher computed exactly the free energy in 2D for finite-size lattices.
+
+The goal of this computational project is to implement a Markov-chain Monte Carlo code
+for the 2D Ising model in the canonical ensemble, and two simple codes for the statistical
+analysis of the data, binning and (optionally) jackknife. You will first check your code
+by comparing your data with the Ferdinand-Fisher exact result (a necessary test for the
+correctness of the code) for small system sizes, and then perform simulations with larger
+sizes at different temperatures, in order to see the different behavior below, above, and near
+the critical temperature.
+
+While the Ising model simulation is relatively easy to implement, it allows to gain familiarity with the most important general aspects of Monte Carlo simulations in systems
+with many degrees of freedom, such as equilibration, autocorrelation, phase coexhistence,
+phase transitions, and critical slowing down. In addition, the availability of exact results
+allows to detect possible mistakes in the code or the data analysis. Students who will enroll
+in the course “Advanced Simulation Methods” in the second semester will reuse the codes
+developed in this project, adapting them to more advanced Monte Carlo algorithms and/or
+extensions of the model.
+
+## Required Tasks
+
 1. Implement the Metropolis algorithm (with single-spin flip Glauber dynamics and random updating) for the Ising model without magnetic field, defined by the energy function $E = −\sum_ {\langle i,j \rangle} S_iS_j$, on the two-dimensional square lattice of linear size $L$ with $N = L^2$ spins, using periodic (toroidal) boundary conditions and nearest-neighbour interactions. The code must have the following input/output:
 
       Input:
