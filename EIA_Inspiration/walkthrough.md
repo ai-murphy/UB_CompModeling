@@ -1,0 +1,28 @@
+# Polymer MC Simulation implementation
+
+Successfully implemented the Monte Carlo parameterization for the given linear polymer as outlined in the requirements.
+
+## 1. Fortran Implementation
+A sequential and an OpenMP parallelized version have been built around a modular architecture split among 4 source files (+ 1 precision file):
+- `kinds_mod.f90`: Double precision configuration.
+- `polymer_mod.f90`: Handles polymer $N=500$ topology setup, building Euclidean coordinates from torsions ($1.54$ Å bond lengths, $114^\circ$ bond angles), and computing observables like Radius of Gyration ($R_g$) and End-to-End Distance ($R_{ee}$).
+- `energy_mod.f90`: Computes Torsional energies and Lennard-Jones parameters ($\sigma_{LJ} = 3.93$ Å). Here, an OpenMP `!$omp parallel do reduction(+:E)` is invoked in `compute_total_energy` to split the nested $O(N^2)$ calculations across available CPU threads.
+- `mc_mod.f90`: Randomly chooses a backbone torsion to perturb within a fixed step size and uses standard Metropolis criteria logic bounded to system $T=300K$ parameterizations.
+- `main.f90`: Primary loop iterating for 10,000 steps, recording energy statistics dynamically. 
+
+All files are prefixed with their specified authors aligned to the breakdown requests (Person A -> Makefile; Person B -> Core MC logic; Person C -> OpenMP & Energy; Person D -> Plots).
+
+## 2. Make Pipeline
+A central `Makefile` has been added. 
+Executing `make all` builds both `poly_mc_serial` and `poly_mc_omp` target executables.
+The Makefile features two run commands:
+- `make run_serial`: Runs simulation unthreaded.
+- `make run_parallel`: Executes binary configured to automatically bind `OMP_NUM_THREADS=4`.
+- `make plot`: Triggers python module parsing.
+
+## 3. Results & Plots
+The sequential runtime produced `energy.dat` and `trajectory.dat`.
+A Python script (`scripts/analyze_polymer.py`) handles ingesting Fortran's formatted float logs and uses Matplotlib to compute observables:
+- `energy_evolution.png`
+- `structural_observables.png`
+- `torsion_distribution.png`
